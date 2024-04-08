@@ -5,6 +5,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import org.koin.androidx.compose.koinViewModel
+import the.end2024.carrotclone.presentation.ui.ChattingListScreen
+import the.end2024.carrotclone.presentation.ui.ChattingScreen
 import the.end2024.carrotclone.presentation.ui.loginPage
 import the.end2024.carrotclone.presentation.ui.mainPage
 import the.end2024.carrotclone.presentation.ui.screen
@@ -29,13 +32,19 @@ object NavigationManager {
                 searchLocation()
             }
             composable("login") {
-                loginPage()
+                loginPage(koinViewModel()).Create()
             }
             composable("signUp") {
-                signUpPage()
+                signUpPage(koinViewModel()).Create()
             }
             composable("main") {
-                mainPage()
+                mainPage(koinViewModel()).Create()
+            }
+            composable("chatList") {
+                ChattingListScreen(koinViewModel(), koinViewModel()).Create()
+            }
+            composable("chat") {
+                ChattingScreen(koinViewModel()).Create()
             }
         }
     }

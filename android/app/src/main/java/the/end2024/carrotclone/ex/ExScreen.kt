@@ -1,4 +1,4 @@
-package the.end2024.carrotclone.presentation.ex
+package the.end2024.carrotclone.ex
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column

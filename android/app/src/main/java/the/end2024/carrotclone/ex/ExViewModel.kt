@@ -1,4 +1,4 @@
-package the.end2024.carrotclone.presentation.ex
+package the.end2024.carrotclone.ex
 
 import the.end2024.carrotclone.core.BaseViewModel
 import the.end2024.carrotclone.core.UiEvent

@@ -1,9 +1,6 @@
 package the.end2024.carrotclone.presentation.ui
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,16 +35,6 @@ import the.end2024.carrotclone.presentation.nav.NavigationManager
 import the.end2024.carrotclone.presentation.theme.CarrotCloneTheme
 import the.end2024.carrotclone.presentation.theme.gMarket_light
 
-class setLocationActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            CarrotCloneTheme {
-                searchLocation()
-            }
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,8 +43,8 @@ fun searchLocation() {
         modifier = Modifier.fillMaxSize()
     ) {
         Column {
-            upSearchBar()
-            currentLocation()
+            upSearchBar()//상태바
+            currentLocation()//현 위치 확인 버튼
         }
     }
 }

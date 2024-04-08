@@ -1,12 +1,8 @@
 package the.end2024.carrotclone.presentation.ui
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,12 +21,12 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,34 +34,47 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
+import the.end2024.carrotclone.core.BaseScreen
+import the.end2024.carrotclone.presentation.contract.UserInfoContract
 import the.end2024.carrotclone.presentation.nav.NavigationManager
-import the.end2024.carrotclone.presentation.theme.CarrotCloneTheme
-import the.end2024.carrotclone.presentation.theme.gMarket_light
 import the.end2024.carrotclone.presentation.theme.gMarket_medium
+import the.end2024.carrotclone.presentation.viewModel.UserInfoViewModel
 
-class signUpActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            CarrotCloneTheme {
+class signUpPage(private val viewModel: UserInfoViewModel) : BaseScreen() {
+    @Composable
+    override fun Create() {
+        Effect()
 
+        Surface(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Column {
+                signUpBar()
+                signUpInfo()
             }
         }
     }
-}
 
-@Composable
-fun signUpPage() {
-    Surface(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Column {
-            signUpBar()
-            signUpInfo()
+    @Composable
+    override fun Effect() {
+        val context = LocalContext.current
+        LaunchedEffect(viewModel.effect) {
+            viewModel.effect.onEach { effect ->
+                when(effect) {
+                    is UserInfoContract.Effect.LoginSuccess -> {
+                        NavigationManager.navController.navigate("main")
+                    }
+                    is UserInfoContract.Effect.SignUpSuccess-> {
+
+                    }
+                }
+            }.collect()
         }
     }
 }
@@ -198,14 +207,5 @@ fun signUpBar() {
                 textAlign = TextAlign.Center
             )
         }
-    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview4() {
-    CarrotCloneTheme {
-        signUpPage()
     }
 }

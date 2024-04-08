@@ -76,12 +76,10 @@ dependencies {
     //Coil(이미지로딩)
     implementation("io.coil-kt:coil-compose:2.4.0")
 
-    //상태바
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.17.0")
-
     //화면이동(네비게이션)
     implementation ("androidx.navigation:navigation-compose:2.6.0")
 
-    //바텀 네비게이션
-    implementation("androidx.compose.material:material:x.y.z")
+    //네트워크 통신
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
 }
